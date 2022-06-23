@@ -22,5 +22,6 @@ tmp
 *.sub
 vis/
 model_zoo/
+models/
 model_zoo_old/
 scripts/
