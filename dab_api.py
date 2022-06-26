@@ -1,4 +1,4 @@
-#cd; conda activate dab; cd DAB-DETR; uvicorn dab_api:app --port 8184 & disown
+#cd; conda activate dab; cd DAB-DETR; uvicorn dab_api:app --port 8185 & disown
 #cd; conda activate clipapi; cd clipapi; uvicorn model_api:app --port 8182 &>>$HOME/output/api.log
 
 # from clip.tools import get_logger
@@ -18,8 +18,7 @@ os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 from fastapi import BackgroundTasks, FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from dab.boxes import get_boxes
-
+from dab.box_segment import *
 
 from PIL import Image
 import requests
@@ -36,11 +35,8 @@ app.add_middleware(
 
 
 @app.post("/get_boxes/")
-async def boxes(url: str):
-    if logger:logger.debug(f'get_boxes {url}')
-    response = requests.get(url, stream=True)
-    image = Image.open(response.raw)
-    return  get_boxes(image)
+async def boxes(url: str,thershold: float = 0.35):
+    return  save_segmented_boxes(url,thershold)
 
 if logger: logger.debug('up')
 

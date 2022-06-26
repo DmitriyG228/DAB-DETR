@@ -2,17 +2,31 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"dtd": "boxes.ipynb",
+index = {"Path.ls": "00_paths.ipynb",
+         "mapbox_access_token": "00_paths.ipynb",
+         "main_path": "00_paths.ipynb",
+         "data_path": "00_paths.ipynb",
+         "reference_images_path": "00_paths.ipynb",
+         "fragment_reference_images_path": "00_paths.ipynb",
+         "save_segmented_boxes": "box_segment.ipynb",
+         "dtd": "boxes.ipynb",
          "vslzr": "boxes.ipynb",
          "model_config_path": "boxes.ipynb",
          "model_checkpoint_path": "boxes.ipynb",
          "device": "boxes.ipynb",
          "args": "boxes.ipynb",
          "checkpoint": "boxes.ipynb",
-         "model": "boxes.ipynb",
-         "get_boxes": "boxes.ipynb"}
+         "model": "food_segment.ipynb",
+         "get_boxes": "boxes.ipynb",
+         "saved_models_dir": "food_segment.ipynb",
+         "saved_model_url_root": "food_segment.ipynb",
+         "saved_model_name": "food_segment.ipynb",
+         "get_food_segment": "food_segment.ipynb"}
 
-modules = ["boxes.py"]
+modules = ["paths.py",
+           "box_segment.py",
+           "boxes.py",
+           "segment.py"]
 
 doc_url = "https://{user}.github.io/dab/"
 

@@ -4,6 +4,7 @@ __all__ = ['dtd', 'dtd', 'vslzr', 'model_config_path', 'model_checkpoint_path', 
            'get_boxes']
 
 # Cell
+
 import os, sys
 import torch
 import numpy as np
@@ -18,6 +19,12 @@ from PIL import Image
 import datasets.transforms as T
 import requests, io
 import requests
+from .paths import *
+
+from .segment import *
+import requests
+from PIL import Image
+from io import BytesIO
 
 
 vslzr = COCOVisualizer()
@@ -44,7 +51,7 @@ def dtd(d,device):
                else v for k, v in d.items()}
 
 # Cell
-def get_boxes(image):
+def get_boxes(image,thershold=35):
 
     image_init = image
 
@@ -63,7 +70,7 @@ def get_boxes(image):
     output = dtd(output,'cpu')
     output = postprocessors['bbox'](output, torch.Tensor([[1.0, 1.0]]))[0]
     # visualize outputs
-    thershold = 0.35 # set a thershold
+    thershold = thershold # set a thershold
 
     scores = output['scores']
     labels = output['labels']
@@ -91,4 +98,4 @@ def get_boxes(image):
 
     return boxes
 
-    #image_init.crop(boxes[0])
+    #
