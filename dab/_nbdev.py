@@ -21,6 +21,9 @@ index = {"Path.ls": "00_paths.ipynb",
          "saved_models_dir": "food_segment.ipynb",
          "saved_model_url_root": "food_segment.ipynb",
          "saved_model_name": "food_segment.ipynb",
+         "crop_image_to_square": "food_segment.ipynb",
+         "inference": "food_segment.ipynb",
+         "exptrapolate": "food_segment.ipynb",
          "get_food_segment": "food_segment.ipynb"}
 
 modules = ["paths.py",
