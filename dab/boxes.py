@@ -70,7 +70,6 @@ def get_boxes(image,thershold=35):
     output = dtd(output,'cpu')
     output = postprocessors['bbox'](output, torch.Tensor([[1.0, 1.0]]))[0]
     # visualize outputs
-    thershold = thershold # set a thershold
 
     scores = output['scores']
     labels = output['labels']

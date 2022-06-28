@@ -15,8 +15,8 @@ from .paths import *
 def save_segmented_boxes(url,thershold=0.35):
     response = requests.get(url)
     img = Image.open(BytesIO(response.content))
-    img = get_food_segment(img)
+    img,mask = get_food_segment(img)
     boxes = get_boxes(img,thershold=thershold)
     photo_id = url.split('/')[-1]
     for id, box in enumerate(boxes): img.crop(box).save(fragment_reference_images_path/f'{photo_id}_{id}.jpg')
-    return boxes
+    return boxes,mask.tolist()

@@ -84,4 +84,4 @@ def get_food_segment(img):
   pred[pred==food_class]=1
   mask = exptrapolate(pred,img.size[1])
   img = np.array(img) * np.stack([mask]*3).T
-  return Image.fromarray(img.astype(np.uint8))
+  return Image.fromarray(img.astype(np.uint8)),mask
