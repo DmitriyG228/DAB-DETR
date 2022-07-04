@@ -1,0 +1,83 @@
+# away.guru
+
+#ssl_certificate /etc/letsencrypt/live/away.guru/fullchain.pem;
+#ssl_certificate_key /etc/letsencrypt/live/away.guru/privkey.pem;
+
+server {
+#    include away.ssl;
+    listen              443 ssl;
+    server_name         away.guru;
+    location / {
+        proxy_pass         http://0.0.0.0:8867;
+        include /etc/nginx/proxy.conf;
+    }
+    location /photos/ {
+        root /home/dima/ssd/ab_data/;
+    }
+}
+server {
+    include grankin.ssl;
+    server_name         dima.grankin.eu;
+    location / {
+        proxy_pass         http://0.0.0.0:8867;
+        include proxy.conf;
+    }
+    location /reference_images/ {
+        root /home/dima/data/food/;
+    }
+    location /fragment_reference_images/ {
+        root /home/dima/data/food/;
+    }
+}
+
+
+server {
+    include away.ssl;
+    server_name         glovo.away.guru;
+    location / {
+        proxy_pass         http://0.0.0.0:8868;
+        include /etc/nginx/proxy.conf;
+    }
+    location /photos_resized/ {
+        root /home/dima/ssd/glovo/;
+    }
+    location /test_photos/ {
+        root /home/dima/ssd/food/test_set/;
+    }
+    location /reference_images/ {
+        root /home/dima/ssd/food/;
+    }
+    location /fragment_reference_images/ {
+        root /home/dima/ssd/food/;
+    }
+}
+
+underscores_in_headers on;
+
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 80 default_server;
+    server_name _;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    include grankin.ssl;
+    server_name         dima.grankin.eu;
+    location / {
+        proxy_pass         http://0.0.0.0:8867;
+        include proxy.conf;
+    }
+    location /photos/ {
+        root /home/dima/ssd/ab_data/;
+    }
+}
+
+server {
+    include grankin.ssl;
+
+    

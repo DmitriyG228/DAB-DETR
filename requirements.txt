@@ -9,3 +9,6 @@ termcolor
 addict
 yapf
 timm
+opencv-python
+seaborn
+docker
